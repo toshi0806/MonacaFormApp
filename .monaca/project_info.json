@@ -9,13 +9,14 @@
     "external_plugins": [
         "cordova-plugin-whitelist@1.2.2",
         "cordova-plugin-splashscreen@3.2.2",
-        "cordova-custom-config@2.0.3"
+        "cordova-custom-config@2.0.3",
+        "cordova-plugin-dialogs@1.2.1"
     ],
-    "title-ja": "MonacaFormApp",
+    "title-ja": "問い合わせフォーム",
     "title-en": "",
-    "description-ja": "問い合わせフォームのアプリです。",
+    "description-ja": "",
     "description-en": "",
     "category": "User Template",
     "platform": [],
-    "name": "generated-1500011727-5962e7feff2af24630d8d643"
+    "name": "generated-1500621143-5962e7feff2af24630d8d643"
 }
