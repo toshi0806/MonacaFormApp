@@ -24,7 +24,8 @@
         font-size:16px;
     }#header_txt {
         color:#808080;
-    }
-    a{
+    }a{
         text-decoration: none;
+    }#searchResult {
+        font-size:18px;
     }

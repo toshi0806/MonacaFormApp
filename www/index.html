@@ -13,7 +13,9 @@
 </head>
 
 <body>
+
     <!--[Demo1]フォーム送信ページ-->
+    
     <div data-role="page" id="FormPage" data-theme="t" align="left">
     <form method="post">
         <header data-role="header" data-position="fixed" data-theme="e" id="header_txt">
@@ -217,7 +219,6 @@
                             <option value="119">119</option>
                             <option value="120">120</option>
                         </select>
-                    
                     </div>
                     </td>
             	</tr>
@@ -242,7 +243,7 @@
     
 
             <!--送信ボタン-->
-            <input type="submit" name="SendBtn" onclick="sendForm();" value="送 信" data-theme="e">
+            <input type="button" name="SendBtn" onclick="sendForm();" value="送 信" data-theme="e">
             <script src="js/app.js">
             </script>
             </input>
@@ -268,10 +269,10 @@
             <center><h3>Demo2：一覧</h3></center>
         </header>
         <p>
-        <section data-role="content" id="sectionListUp">
-            <table id="formTable" border="1" width="100%" cellspacing="0" cellpadding="10" align="center" data-column-popup-theme="e">
-                <tbody id="formTableBody"></tbody>
-            </table>
+        <section id="searchResult"></section>
+
+        <section data-role="content">
+            <table id="formTable" border="1" width="100%" cellspacing="0" cellpadding="10" align="center" data-column-popup-theme="e"></table>
         </section>
 
         <!--フッター-->
@@ -296,7 +297,7 @@
                 <form action="" method="post">
                     <label for="search">1.アドレスで検索</label>
                     <input type="email" id="search_address" size=15>
-                    <input type="submit" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchAddress();">
+                    <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchAddress();">
                     <p>
 
                     <label for="search">2.お住まい検索</label>
@@ -350,7 +351,7 @@
                                 <option value="鹿児島県">鹿児島県</option>
                                 <option value="沖縄県">沖縄県</option>
                     </select>
-                    <input type="submit" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchPrefecture();">
+                    <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchPrefecture();">
                     <p>
                     
                     <label for="search">3.日付で検索</label>
@@ -361,7 +362,7 @@
                         <option value="before" id="before">以前</option>
                         <option value="after"  id="after">以後</option>
                     </select>
-                    <input type="submit" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchDate();">
+                    <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchDate();">
                     <p>
 
 

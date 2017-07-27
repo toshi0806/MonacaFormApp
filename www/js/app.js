@@ -1,9 +1,9 @@
 // APIキーの設定とSDKの初期化
-var appKey    = "YOUR_APPLICATIONKEY";
-var clientKey = "YOUR_CLIENTKEY";
+var appKey    = "アプリケーションキー";
+var clientKey = "クライアントキー";
 var ncmb = new NCMB(appKey,clientKey);
 
-// -------[Demo1]「送信」ボタン押下時の処理 -------//
+// -------[Demo1フォームに入力された内容を送信する -------//
 function sendForm() {
     
     var SaveData = ncmb.DataStore("SaveData");   //mBaaSにて保存先クラスを作成
@@ -31,13 +31,13 @@ function sendForm() {
         alert("お問い合わせ内容が入力されていません");
     }else{
         sendData.set("username", username)
-                 .set("mailaddress", mailaddress)
-                 .set("prefecture", prefecture)
-    	         .set("age", ageint)
-    	         .set("title", title)
-    	         .set("comment", comment)
-    	         .save()
-    	         .then(function(object){
+                .set("mailaddress", mailaddress)
+                .set("prefecture", prefecture)
+    	        .set("age", ageint)
+    	        .set("title", title)
+    	        .set("comment", comment)
+    	        .save()
+    	        .then(function(object){
 				    // 保存に成功した場合の処理
 				    alert("お問い合わせを受け付けました");
                     $.mobile.changePage('#FormPage');
@@ -70,35 +70,36 @@ function checkForm() {
 				}
 				// テーブルにデータをセット
 				setData(results);
+                var searchresult = document.getElementById("searchResult");
+                    searchResult.innerHTML = "お問い合わせ一覧";
 				})
 				.catch(function(error){
     				// 検索に失敗した場合の処理
-    				alert("NG:" + error);
                     console.log(error);
 				});
                 $("#formTable").empty();
                 
 }
 
-// -------[Demo2]テーブルにデータをセットする処理-------//
+// -------[Demo2/Demo3]テーブルにデータをセットする処理------- //
 function setData(formArray) {
     
     //操作するテーブルへの参照を取得
     var table = document.getElementById("formTable");
         for(i=0; i<formArray.length; i++) {
             var object = formArray[i];
-            
-            var year    = object.get("createDate");    //YYYYを取り出す
-            var month   = object.get("createDate");    //MMを取り出す
-            var day     = object.get("createDate");    //DDを取り出す            
-            var hour    = object.get("createDate");    //hhを取り出す
-            var minute  = object.get("createDate");    //mmを取り出す
+            var year    = object.get("createDate").slice(0,4);      //YYYYを取り出す
+            var month   = object.get("createDate").slice(5,7);      //MMを取り出す
+            var day     = object.get("createDate").slice(8,10);     //DDを取り出す            
+            var hour    = object.get("createDate");                 //hhを取り出す
+            var minute  = object.get("createDate").slice(14,16);    //mmを取り出す
             
             //hourが協定時間なので、現地時間（+09:00）となるようにする
             var datehour = new Date(hour);  //hourをDate型に変換
-            var jsthour = datehour.getHours();  //datehourを現地時間にする
-            var jstDate = year.slice(0,4) +"/"+ month.slice(5,7) +"/"+ day.slice(8,10) + " " + jsthour +":"+ minute.slice(14,16);   
-
+            var jsthour  = datehour.getHours();  //datehourを現地時間にする
+            var jstDate  = year + "/" + month + "/" + day + " " + jsthour +":"+ minute;
+            
+            //テーブルに行とセルを設定
             var row        = table.insertRow(-1);
             var cell       = row.insertCell(-1);
         	
@@ -106,7 +107,8 @@ function setData(formArray) {
         }
 }
 
-// -------[Demo3-1]入力されたアドレスを調べる処理-------//
+
+// -------[Demo3-1]入力されたアドレスの検索と取得------- //
 function checkAddress(){
     
     var formSearch = ncmb.DataStore("SaveData");    //検索クラスのインスタンスを生成
@@ -121,53 +123,52 @@ function checkAddress(){
     		    //検索成功時の処理
                 if(search.length>0){
                     //検索されたアドレスがあった場合
-        		   console.log("検索に成功しました:"+search.length);
-                   alert(search.length+"件ヒットしましした");
                     setData(search);
-                    $.mobile.changePage('#ListUpPage');
+                    var searchresult = document.getElementById("searchResult");
+                        searchResult.innerHTML = "検索結果：" + search.length + "件";
+                    console.log("検索に成功しました:"+search.length);
                 }else if(search.length == 0){
                     //検索されたアドレスがなかった場合
-                    document.getElementById("sectionListUp");
-                    sectionListUp.innerHTML = "検索結果："+search.length+"件";  //0件と表示
+                    var table = document.getElementById("formTable");
+                        formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
+                    var searchresult = document.getElementById("searchResult");
+                        searchResult.innerHTML = "検索結果：" + search.length + "件";
                     console.log("検索されたアドレスはありません");
-                    
                 }
-                 $.mobile.changePage('#ListUpPage');
+                //検索後にページ遷移する
+                $.mobile.changePage('#ListUpPage');
                 
     	        })
         	    .catch(function(error){
     			    //検索失敗時の処理
-    			    alert("検索に失敗しました：" + error);
     		    	console.log("検索に失敗しました：" + error);
-                    
     		    });
                 $("#formTable").empty();
 }
 
 // -------[Demo3-1]アドレス検索ボタン-------//
 function searchAddress(){
-		
-    var formSearch = ncmb.DataStore("SaveData");    //検索クラスのインスタンスを生成
+
     var mailaddress = $('#search_address').val();   //アドレス欄に入力された値を変数mailaddressに格納
         
-        //フィールドの中から探す
+        //アドレスをフィールドの中から探す
         if(mailaddress == ""){
             alert("メールアドレスを入力してください");
             $.mobile.changePage("#SearchPage");
         }else{
             //入力されたアドレスを調べる
-            checkAddress();
+            checkAddress(mailaddress);
         }
         $("#formTable").empty();
 }
 
-//------- [Demo3-2]入力された都道府県を調べる処理-------//
+//------- [Demo3-2]入力された都道府県の検索と取得-------//
 function checkPrefecture(){
     
         var formSearch = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
-        var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県の値を変数prefectureに格納
+        var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県を変数prefectureに格納
     
-        formSearch.order("date",true)
+        formSearch.order("createDate",true)
                   .order("username", true)
                   .order("title",true)
                   .equalTo("prefecture",prefecture)
@@ -177,74 +178,81 @@ function checkPrefecture(){
     					if(search.length>0){
                             //検索された都道府県があった場合
                             console.log("検索に成功しました:"+search.length);
-                            alert(search.length+"件ヒットしましした");
                             setData(search);
+                            var searchresult = document.getElementById("searchResult");
+                                searchResult.innerHTML = "検索結果：" + search.length + "件";
     					}else if(search.length == 0){
                             //検索された都道府県がなかった場合
-                            document.getElementById("sectionListUp");
-                            sectionListUp.innerHTML = "検索結果："+search.length+"件";  //0件と表示
+                            var table = document.getElementById("formTable");
+                                formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
+                            var searchresult = document.getElementById("searchResult");
+                                searchResult.innerHTML = "検索結果：" + search.length + "件";
     					}
                         $.mobile.changePage('#ListUpPage');
     				  })
     				  .catch(function(error){
     					//検索失敗時の処理
-    					alert("検索に失敗しました：" + error);
     					console.log("検索に失敗しました：" + error);
     				  });
 }
 
-//------- [Demo3-2]住まい検索ボタン-------//
+//------- [Demo3-2]住まい検索ボタン -------//
 function searchPrefecture(){
-    	var formSearch = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
-        var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県の値を変数prefectureに格納
+
+        var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県を変数prefectureに格納
         
         //フィールドの中から探す
         if(prefecture == ""){
             alert("都道府県を選択してください");
         }else{
-            checkPrefecture();
+            checkPrefecture(prefecture);
         }
         $("#formTable").empty();
 }
 
-//------- [Demo3-3]YYYY-MM-DD hh:mm以後の日付を調べる処理 -------//
+//------- [Demo3-3]YYYY-MM-DD hh:mm以後の日付の検索と取得 -------//
 function checkAfterDate(){
-    
+        
 		var formSearch  = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
         var searchdate  = $("#search_date").val();           //年/月/日の値を変数searchdateに格納
         var searchtime  = $("#search_time").val();           //時間に入力された値を変数searchtimeに格納
         var beforeafter = $("#search_beforeafter").val();    //以前以後のどちらか選択された値を変数beforeafterに格納
-        var beforedate  = $("#before").val();                //選択された値が以前だった場合、変数beforedateに格納
-        var afterdate   = $("#after").val();                 //選択された値が以後だった場合、変数afterdateに格納        
-        var dateandtime = searchdate+" "+searchtime;         //検索用に二つの変数(searchdateとsearchtime)を合体
+        var before      = $("#before").val();                //選択された値が以前だった場合、変数beforeに格納
+        var after       = $("#after").val();                 //選択された値が以後だった場合、変数afterに格納        
+        var dateandtime = searchdate+" "+searchtime;         //検索用に二つの変数(searchdateとsearchtime)を合体　YYYY/MM/DD hh:mm
         
-        formSearch.order("date",true)
+        //Date型に変換
+        var date = new Date(dateandtime);
+        
+        //dateをISO形式に変換し第二引数に設定
+        formSearch.greaterThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() })
+                  .order("createDate",true)
                   .order("username",true)
                   .order("title",true)
-                  .greaterThanOrEqualTo("date",dateandtime)
                   .fetchAll()
                   .then(function(search){
                         //検索成功時の処理
                         if(search.length>0){
                             //以後で検索＆検索結果が0以上の場合
                     		console.log("以後の検索に成功しました:"+search.length);
-                            alert(search.length+"件ヒットしましした");
                             setData(search);
+                            var searchresult = document.getElementById("searchResult");
+                                searchResult.innerHTML = "検索結果：" + search.length + "件";
                         }else if(search.length == 0){
                             //以後で検索＆検索結果が0の場合
-                            document.getElementById("sectionListUp");
-                            sectionListUp.innerHTML = "検索結果："+search.length+"件";  //0件と表示
+                            var table = document.getElementById("formTable");
+                                formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
+                            var searchresult = document.getElementById("searchResult");
+                                searchResult.innerHTML = "検索結果：" + search.length + "件";
                         }
                         $.mobile.changePage('#ListUpPage');
                   })
                   .catch(function(error){
             		    //検索失敗時の処理
-            			alert("検索に失敗しました：" + error);
             			console.log("検索に失敗しました：" + error);
             	  });
-        
 }
-//------- [Demo3-3]YYYY-MM-DD hh:mm以前の日付を調べる処理 -------//
+//------- [Demo3-3]YYYY-MM-DD hh:mm以前の日付の検索と取得 -------//
 function checkBeforeDate(){
         
         //checkAfterDate()と同じ
@@ -252,32 +260,38 @@ function checkBeforeDate(){
         var searchdate  = $("#search_date").val();
         var searchtime  = $("#search_time").val();
         var beforeafter = $("#search_beforeafter").val();
-        var beforedate  = $("#before").val();
-        var afterdate   = $("#after").val();
+        var before      = $("#before").val();
+        var after       = $("#after").val();
         var dateandtime = searchdate+" "+searchtime;
         
-        formSearch.order("date",true)
+        //Date型に変換
+        var date = new Date(dateandtime);
+        
+        //dateをISO形式に変換し第二引数に設定
+        formSearch.lessThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() })
+                  .order("date",true)
                   .order("username",true)
                   .order("title",true)
-                  .lessThanOrEqualTo("date",dateandtime)
                   .fetchAll()       
                   .then(function(search){
                         //検索成功時の処理
                         if(search.length>0){
                             //以前で検索＆検索結果が0以上の場合
                             console.log("以前の検索に成功しました:"+search.length);
-                            alert(search.length+"件ヒットしましした");
                             setData(search);
+                            var searchresult = document.getElementById("searchResult");
+                                searchResult.innerHTML = "検索結果：" + search.length + "件";
                         }else if(search.length == 0){
                             //以前で検索＆検索結果が0の場合
-                            document.getElementById("sectionListUp");
-                            sectionListUp.innerHTML = "検索結果："+search.length+"件";  //0件と表示
+                            var table = document.getElementById("formTable");
+                                formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
+                            var searchresult = document.getElementById("searchResult");
+                                searchResult.innerHTML = "検索結果：" + search.length + "件";
                         }
                         $.mobile.changePage('#ListUpPage');
                   })
         	      .catch(function(error){
         			    //検索失敗時の処理
-        			    alert("検索に失敗しました：" + error);
         			    console.log("検索に失敗しました：" + error);
         	      });
         
@@ -287,21 +301,23 @@ function checkBeforeDate(){
 function searchDate(){
         
         //checkBeforeDate()、checkAfterDate()と同じ
-		var formSearch  = ncmb.DataStore("SaveData");
         var searchdate  = $("#search_date").val();
         var searchtime  = $("#search_time").val();
         var beforeafter = $("#search_beforeafter").val();
-        var beforedate  = $("#before").val();
-        var afterdate   = $("#after").val();
+        var before      = $("#before").val();
+        var after       = $("#after").val();
         var dateandtime = searchdate+" "+searchtime;
     
+        //Date型に変換
+        var date = new Date(dateandtime);
+        
         //フィールドの中から探す
-            if(afterdate　== beforeafter){
+            if(after　== beforeafter){
                 //以後の日付を探す
-                checkAfterDate();
-            }else if(beforedate == beforeafter){
+                checkAfterDate(date);
+            }else if(before == beforeafter){
                 //以前の日付を探す
-                checkBeforeDate();
+                checkBeforeDate(date);
             }else if(searchdate == ""){
                 alert("年月日を入力してください");                
             }else if(searchtime == ""){
