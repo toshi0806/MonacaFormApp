@@ -59,17 +59,17 @@ function checkForm(){
 
             //データの取得
             .count()
-			.fetchAll()
-			.then(function(results){
+            .fetchAll()
+            .then(function(results){
                 //検索に成功した場合の処理
                 console.log(results.count);
-				//テーブルにデータをセット
-				setData(results);
-			})
-			.catch(function(error){
+                //テーブルにデータをセット
+                setData(results);
+            })
+            .catch(function(error){
                 //検索に失敗した場合の処理
                 console.log(error);
-			});
+            });
             $("#formTable").empty();
 }
 
@@ -83,9 +83,9 @@ function checkAddress(){
             　.fetchAll()
               .then(function(results){
                     //検索成功時の処理
-                        console.log("検索に成功しました:"+results.length);
-                        setData(results);
-                        $.mobile.changePage('#ListUpPage');
+                    console.log("検索に成功しました:"+results.length);
+                    setData(results);
+                    $.mobile.changePage('#ListUpPage');
               })
               .catch(function(error){
                     //検索失敗時の処理
