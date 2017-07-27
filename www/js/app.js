@@ -51,12 +51,12 @@ function sendForm() {
 //------- [Demo2]保存したデータを全件検索し取得する-------//
 function checkForm() {
     var formData = ncmb.DataStore("SaveData");
-
+    
 	// 日付、名前、タイトルを降順でデータを取得するように設定する
     formData.order("createDate",true)
             .order("username", true)
             .order("title",true)
-            
+
             //データの取得
 			.count()
 			.fetchAll()
@@ -74,11 +74,10 @@ function checkForm() {
                 
 }
 
-
 // -------[Demo3-1]アドレスを指定して検索し取得する------- //
 function checkAddress(){
     var formSearch = ncmb.DataStore("SaveData");    //検索クラスのインスタンスを生成
-	var mailaddress = $('#search_address').val();   //アドレス欄に入力された値を変数mailaddressに格納
+    var mailaddress = $('#search_address').val();   //アドレス欄に入力された値を変数mailaddressに格納
     
     formSearch.order("createDate",true)
             　.equalTo("mailaddress",mailaddress)
@@ -97,76 +96,71 @@ function checkAddress(){
 
 //------- [Demo3-2]都道府県を指定して検索し取得する-------//
 function checkPrefecture(){
-        var formSearch = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
-        var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県を変数prefectureに格納
+    var formSearch = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
+    var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県を変数prefectureに格納
         
-        formSearch.order("createDate",true)
-                  .equalTo("prefecture",prefecture)
-                  .fetchAll()
-                  .then(function(results){
-                        //検索成功時の処理
-                        console.log("検索に成功しました:"+results.length);
-                        setData(results);
-                        $.mobile.changePage('#ListUpPage');
-                  })
-                  .catch(function(error){
-                        //検索失敗時の処理
-                        console.log("検索に失敗しました：" + error);
-                  });
+    formSearch.order("createDate",true)
+              .equalTo("prefecture",prefecture)
+              .fetchAll()
+              .then(function(results){
+                    //検索成功時の処理
+                    console.log("検索に成功しました:"+results.length);
+                    setData(results);
+                    $.mobile.changePage('#ListUpPage');
+              })
+              .catch(function(error){
+                    //検索失敗時の処理
+                    console.log("検索に失敗しました：" + error);
+              });
 }
 
-
 //------- [Demo3-3]YYYY-MM-DD hh:mm以後の日付を指定して検索し取得する -------//
-function checkDate(divider){
-        
-		var formSearch  = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
-        var searchdate  = $("#search_date").val();           //年/月/日の値を変数searchdateに格納
-        var searchtime  = $("#search_time").val();           //時間に入力された値を変数searchtimeに格納
-        var beforeafter = $("#search_beforeafter").val();    //以前以後のどちらか選択された値を変数beforeafterに格納
-        var before      = $("#before").val();                //選択された値が以前だった場合、変数beforeに格納
-        var after       = $("#after").val();                 //選択された値が以後だった場合、変数afterに格納        
-        var dateandtime = searchdate+" "+searchtime;         //検索用に二つの変数(searchdateとsearchtime)を合体　YYYY/MM/DD hh:mm
-        
-        //Date型に変換
-        var date = new Date(dateandtime);
-        date.setHours(date.getHours() + 9); 
-        
-        alert("5");
-        
-        //dateをISO形式に変換し第二引数に設定
-        if(divider==true){
-            formSearch.lessThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() });
-            alert("3:"+date.toISOString());
-        }else{
-            formSearch.greaterThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() });
-            alert("4:"+date.toISOString());
-        }
-        alert("7");
-        
-        formSearch.order("createDate",true)
-                  .fetchAll()
-                  .then(function(results){
-                        //検索成功時の処理
-                        alert("6");
-                        if(results.length>0){
-                            //以後で検索＆検索結果が0以上の場合
-                            console.log("検索に成功しました:"+results.length);
-                            setData(results);
-                            // var searchresult = document.getElementById("searchResult");
-                            //     searchResult.innerHTML = "検索結果：" + results.length + "件";
-                        }else if(results.length == 0){
-                            //以後で検索＆検索結果が0の場合
-                            var table = document.getElementById("formTable");
-                                formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
-                            var searchresult = document.getElementById("searchResult");
-                                searchResult.innerHTML = "検索結果：" + results.length + "件";
-                        }
-                        $.mobile.changePage('#ListUpPage');
-                  })
-                  .catch(function(error){
-                        //検索失敗時の処理
-                        console.log("検索に失敗しました：" + error);
-                  });
+function checkDate(divider){    
+	var formSearch  = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
+    var searchdate  = $("#search_date").val();           //年/月/日の値を変数searchdateに格納
+    var searchtime  = $("#search_time").val();           //時間に入力された値を変数searchtimeに格納
+    var beforeafter = $("#search_beforeafter").val();    //以前以後のどちらか選択された値を変数beforeafterに格納
+    var before      = $("#before").val();                //選択された値が以前だった場合、変数beforeに格納
+    var after       = $("#after").val();                 //選択された値が以後だった場合、変数afterに格納        
+    var dateandtime = searchdate+" "+searchtime;         //検索用に二つの変数(searchdateとsearchtime)を合体　YYYY/MM/DD hh:mm
+
+    //Date型に変換
+    var date = new Date(dateandtime);
+    date.setHours(date.getHours() + 9); 
+    alert("5");
+
+    //dateをISO形式に変換し第二引数に設定
+    if(divider==true){
+        formSearch.lessThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() });
+        alert("3:"+date.toISOString());
+    }else{
+        formSearch.greaterThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() });
+        alert("4:"+date.toISOString());
+    }
+    alert("7");    
+
+    formSearch.order("createDate",true)
+              .fetchAll()
+              .then(function(results){
+                    //検索成功時の処理
+                    alert("6");
+                    if(results.length>0){
+                        //以後で検索＆検索結果が0以上の場合
+                        console.log("検索に成功しました:"+results.length);
+                        setData(results);
+                    }else if(results.length == 0){
+                        //以後で検索＆検索結果が0の場合
+                        var table = document.getElementById("formTable");
+                        formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
+                        var searchresult = document.getElementById("searchResult");
+                        searchResult.innerHTML = "検索結果：" + results.length + "件";
+                    }
+                    $.mobile.changePage('#ListUpPage');
+              })
+              .catch(function(error){
+                    //検索失敗時の処理
+                    console.log("検索に失敗しました：" + error);
+              });
 }
 
 
@@ -193,78 +187,78 @@ function setData(results) {
             
             formTable.rows[i].cells[0].innerHTML = jstDate + "<br>" + "名前：　　" + object.get("username") + " さん"+"<br>" +"タイトル："+object.get("title");   
         }
+    var searchresult = document.getElementById("searchResult");
+    searchResult.innerHTML = "検索結果：" + results.length + "件";
+    
+    if(results.length == 0){
+        var table = document.getElementById("formTable");
+        formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
         var searchresult = document.getElementById("searchResult");
         searchResult.innerHTML = "検索結果：" + results.length + "件";
-            
-        if(results.length == 0){
-            var table = document.getElementById("formTable");
-            formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
-            var searchresult = document.getElementById("searchResult");
-            searchResult.innerHTML = "検索結果：" + results.length + "件";
-        }else if(function(error){
-            //検索失敗時の処理
-            console.log("検索に失敗しました：" + error);
-        });
-        $.mobile.changePage('#ListUpPage');
+    }else if(function(error){
+        //検索失敗時の処理
+        console.log("検索に失敗しました：" + error);
+    });
+    $.mobile.changePage('#ListUpPage');
 }
 
 //アドレス検索ボタン押下時の処理
 function searchAddress(){
     var mailaddress = $('#search_address').val();   //アドレス欄に入力された値を変数mailaddressに格納
         
-        //アドレスをフィールドの中から探す
-        if(mailaddress == ""){
-            alert("メールアドレスを入力してください");
-            $.mobile.changePage("#SearchPage");
-        }else{
-            //入力されたアドレスを調べる
-            checkAddress(mailaddress);
-        }
-        $("#formTable").empty();
+    //アドレスをフィールドの中から探す
+    if(mailaddress == ""){
+        alert("メールアドレスを入力してください");
+        $.mobile.changePage("#SearchPage");
+    }else{
+        //入力されたアドレスを調べる
+        checkAddress(mailaddress);
+    }
+    $("#formTable").empty();
 }
 
 //住まい検索ボタン押下時の処理
 function searchPrefecture(){
-        var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県を変数prefectureに格納
-        
-        //フィールドの中から探す
-        if(prefecture == ""){
-            alert("都道府県を選択してください");
-        }else{
-            checkPrefecture(prefecture);
-        }
-        $("#formTable").empty();
+    var prefecture = $("#search_prefecture").val();     //ユーザーに選択された都道府県を変数prefectureに格納
+    
+    //フィールドの中から探す
+    if(prefecture == ""){
+        alert("都道府県を選択してください");
+    }else{
+        checkPrefecture(prefecture);
+    }
+    $("#formTable").empty();
 }
 
 //日付検索ボタン押下時の処理
 function searchDate(){
-        var searchdate  = $("#search_date").val();
-        var searchtime  = $("#search_time").val();
-        var beforeafter = $("#search_beforeafter").val();
-        var dateandtime = searchdate+" "+searchtime;
-        
-        var divider = true;
-        
-        //Date型に変換
-        var date = new Date(dateandtime);
-        
-        //フィールドの中から探す
-            if(searchdate == ""){
-                alert("年月日を入力してください");                
-            }else if(searchtime == ""){
-                alert("時間を入力してください"); 
-            }else if(beforeafter == ""){
-                alert("以前／以後を選択してください");
-            }else {
-                if($("#search_beforeafter").val() == "before"){
-                    alert("1:");
-                    divider = true;
-                }else{
-                    alert("2:");
-                    divider = false;
-                }
-                checkDate(divider);
-            }
-        $("#formTable").empty();
+    var searchdate  = $("#search_date").val();
+    var searchtime  = $("#search_time").val();
+    var beforeafter = $("#search_beforeafter").val();
+    var dateandtime = searchdate+" "+searchtime;
+    
+    var divider = true;
+    
+    //Date型に変換
+    var date = new Date(dateandtime);
+    
+    //フィールドの中から探す
+    if(searchdate == ""){
+        alert("年月日を入力してください");                
+    }else if(searchtime == ""){
+        alert("時間を入力してください"); 
+    }else if(beforeafter == ""){
+        alert("以前／以後を選択してください");
+    }else{
+        if($("#search_beforeafter").val() == "before"){
+            alert("1:");
+            divider = true;
+        }else{
+            alert("2:");
+            divider = false;
+        }
+    checkDate(divider);
+    }
+    $("#formTable").empty();
 }
 
