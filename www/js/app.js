@@ -115,7 +115,7 @@ function checkPrefecture(){
 
 //------- [Demo3-3]YYYY-MM-DD hh:mm以後の日付を指定して検索し取得する -------//
 function checkDate(divider){
-	var formSearch  = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
+    var formSearch  = ncmb.DataStore("SaveData");        //検索クラスのインスタンスを生成
     var searchdate  = $("#search_date").val();           //年/月/日の値を変数searchdateに格納
     var searchtime  = $("#search_time").val();           //時間に入力された値を変数searchtimeに格納
     var beforeafter = $("#search_beforeafter").val();    //以前以後のどちらか選択された値を変数beforeafterに格納
