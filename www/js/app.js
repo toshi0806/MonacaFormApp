@@ -56,22 +56,21 @@ function checkForm(){
     formData.order("createDate",true)
             .order("username", true)
             .order("title",true)
-            
+
             //データの取得
-			.count()
+            .count()
 			.fetchAll()
 			.then(function(results){
-                // 検索に成功した場合の処理
-                console.log(results.count); // 検索結果の件数を表示
-				// テーブルにデータをセット
+                //検索に成功した場合の処理
+                console.log(results.count);
+				//テーブルにデータをセット
 				setData(results);
 			})
 			.catch(function(error){
-                // 検索に失敗した場合の処理
+                //検索に失敗した場合の処理
                 console.log(error);
 			});
             $("#formTable").empty();
-                
 }
 
 // -------[Demo3-1]アドレスを指定して検索し取得する------- //
