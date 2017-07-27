@@ -1,7 +1,7 @@
 // APIキーの設定とSDKの初期化
 var appKey    = "アプリケーションキー";
 var clientKey = "クライアントキー";
-var ncmb = new NCMB(appKey,clientKey);
+var ncmb    　= new NCMB(appKey,clientKey);
 
 // -------[Demo1]フォームに入力された内容をmBaaSに保存する -------//
 function sendForm() {
@@ -49,14 +49,14 @@ function sendForm() {
 }
 
 //------- [Demo2]保存したデータを全件検索し取得する-------//
-function checkForm() {
+function checkForm(){
     var formData = ncmb.DataStore("SaveData");
-    
-	// 日付、名前、タイトルを降順でデータを取得するように設定する
+
+    //日付、名前、タイトルを降順でデータを取得するように設定する
     formData.order("createDate",true)
             .order("username", true)
             .order("title",true)
-
+            
             //データの取得
 			.count()
 			.fetchAll()
