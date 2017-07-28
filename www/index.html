@@ -1,49 +1,294 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="components/loader.js"></script>
-    <link rel="stylesheet" href="components/loader.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/cssua.min.js"></script>
-    <script src="js/app.js"></script>
-    <title>お問い合わせフォーム</title>
-</head>
-
-<body>
-
-    <!--[Demo1]フォーム送信ページ-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+        <script src="components/loader.js"></script>
+        <link rel="stylesheet" href="components/loader.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/cssua.min.js"></script>
+        <script src="js/app.js"></script>
+        <title>お問い合わせフォーム</title>
+    </head>
     
-    <div data-role="page" id="FormPage" data-theme="t" align="left">
-    <form method="post">
-        <header data-role="header" data-position="fixed" data-theme="e" id="header_txt">
-           <center><h3>Demo1：フォーム</h3></center>
-        </header>
-        <section data-role="content">
-            <div id="form_txt">お名前
-            <span id="txt_red">(必須)</span>
+    <body>
+        <!--[Demo1]フォーム送信ページ-->
+        <div data-role="page" id="FormPage" data-theme="t" align="left">
+            <form method="post">
+                <header data-role="header" data-position="fixed" data-theme="e" id="header_txt">
+                   <center><h3>Demo1：フォーム</h3></center>
+                </header>
+                <section data-role="content">
+                    <div id="form_txt">お名前
+                    <span id="txt_red">(必須)</span>
+                    </div>
+                    <div align="center">
+                        <input type ="text" id="form_name" size=40>
+                    </div>
+        
+                    <div id="form_txt">メールアドレス
+                        <span id="txt_red">(必須)</span>
+                    </div>
+                    <div align = "center">
+                        <input type ="email" id="form_mailaddress" size=40>
+                    </div>
+                    
+                    <table>
+                        <tr>
+                            <td>
+                                <div id="form_txt">お住まい
+                                    <select id="form_prefecture">
+                                        <option value="" selected>--選択--</option>
+                                        <option value="北海道">北海道</option>
+                                        <option value="青森県">青森県</option>
+                                        <option value="岩手県">岩手県</option>
+                                        <option value="宮城県">宮城県</option>
+                                        <option value="秋田県">秋田県</option>
+                                        <option value="山形県">山形県</option>
+                                        <option value="福島県">福島県</option>
+                                        <option value="茨城県">茨城県</option>
+                                        <option value="栃木県">栃木県</option>
+                                        <option value="群馬県">群馬県</option>
+                                        <option value="埼玉県">埼玉県</option>
+                                        <option value="千葉県">千葉県</option>
+                                        <option value="東京都">東京都</option>
+                                        <option value="神奈川県">神奈川県</option>
+                                        <option value="新潟県">新潟県</option>
+                                        <option value="富山県">富山県</option>
+                                        <option value="石川県">石川県</option>
+                                        <option value="福井県">福井県</option>
+                                        <option value="山梨県">山梨県</option>
+                                        <option value="長野県">長野県</option>
+                                        <option value="岐阜県">岐阜県</option>
+                                        <option value="静岡県">静岡県</option>
+                                        <option value="愛知県">愛知県</option>
+                                        <option value="三重県">三重県</option>
+                                        <option value="滋賀県">滋賀県</option>
+                                        <option value="京都府">京都府</option>
+                                        <option value="大阪府">大阪府</option>
+                                        <option value="兵庫県">兵庫県</option>
+                                        <option value="奈良県">奈良県</option>
+                                        <option value="和歌山県">和歌山県</option>
+                                        <option value="鳥取県">鳥取県</option>
+                                        <option value="島根県">島根県</option>
+                                        <option value="岡山県">岡山県</option>
+                                        <option value="広島県">広島県</option>
+                                        <option value="山口県">山口県</option>
+                                        <option value="徳島県">徳島県</option>
+                                        <option value="香川県">香川県</option>
+                                        <option value="愛媛県">愛媛県</option>
+                                        <option value="高知県">高知県</option>
+                                        <option value="福岡県">福岡県</option>
+                                        <option value="佐賀県">佐賀県</option>
+                                        <option value="長崎県">長崎県</option>
+                                        <option value="熊本県">熊本県</option>
+                                        <option value="大分県">大分県</option>
+                                        <option value="宮崎県">宮崎県</option>
+                                        <option value="鹿児島県">鹿児島県</option>
+                                        <option value="沖縄県">沖縄県</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div id="form_txt">ご年齢
+                                    <select id="form_age">
+                                        <option value="" selected>--選択--</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                        <option value="32">32</option>
+                                        <option value="33">33</option>
+                                        <option value="34">34</option>
+                                        <option value="35">35</option>
+                                        <option value="36">36</option>
+                                        <option value="37">37</option>
+                                        <option value="38">38</option>
+                                        <option value="39">39</option>
+                                        <option value="40">40</option>
+                                        <option value="41">41</option>
+                                        <option value="42">42</option>
+                                        <option value="43">43</option>
+                                        <option value="44">44</option>
+                                        <option value="45">45</option>
+                                        <option value="46">46</option>
+                                        <option value="47">47</option>
+                                        <option value="48">48</option>
+                                        <option value="49">49</option>
+                                        <option value="50">50</option>
+                                        <option value="51">51</option>
+                                        <option value="52">52</option>
+                                        <option value="53">53</option>
+                                        <option value="54">54</option>
+                                        <option value="55">55</option>
+                                        <option value="56">56</option>
+                                        <option value="57">57</option>
+                                        <option value="58">58</option>
+                                        <option value="59">59</option>
+                                        <option value="60">60</option>
+                                        <option value="61">61</option>
+                                        <option value="62">62</option>
+                                        <option value="63">63</option>
+                                        <option value="64">64</option>
+                                        <option value="65">65</option>
+                                        <option value="66">66</option>
+                                        <option value="67">67</option>
+                                        <option value="68">68</option>
+                                        <option value="69">69</option>
+                                        <option value="70">70</option>
+                                        <option value="71">71</option>
+                                        <option value="72">72</option>
+                                        <option value="73">73</option>
+                                        <option value="74">74</option>
+                                        <option value="75">75</option>
+                                        <option value="76">76</option>
+                                        <option value="77">77</option>
+                                        <option value="78">78</option>
+                                        <option value="79">79</option>
+                                        <option value="80">80</option>
+                                        <option value="81">81</option>
+                                        <option value="82">82</option>
+                                        <option value="83">83</option>
+                                        <option value="84">84</option>
+                                        <option value="85">85</option>
+                                        <option value="86">86</option>
+                                        <option value="87">87</option>
+                                        <option value="88">88</option>
+                                        <option value="89">89</option>
+                                        <option value="90">90</option>
+                                        <option value="91">91</option>
+                                        <option value="92">92</option>
+                                        <option value="93">93</option>
+                                        <option value="94">94</option>
+                                        <option value="95">95</option>
+                                        <option value="96">96</option>
+                                        <option value="97">97</option>
+                                        <option value="98">98</option>
+                                        <option value="99">99</option>
+                                        <option value="100">100</option>
+                                        <option value="101">101</option>
+                                        <option value="102">102</option>
+                                        <option value="103">103</option>
+                                        <option value="104">104</option>
+                                        <option value="105">105</option>
+                                        <option value="106">106</option>
+                                        <option value="107">107</option>
+                                        <option value="108">108</option>
+                                        <option value="109">109</option>
+                                        <option value="110">110</option>
+                                        <option value="111">111</option>
+                                        <option value="112">112</option>
+                                        <option value="113">113</option>
+                                        <option value="114">114</option>
+                                        <option value="115">115</option>
+                                        <option value="116">116</option>
+                                        <option value="117">117</option>
+                                        <option value="118">118</option>
+                                        <option value="119">119</option>
+                                        <option value="120">120</option>
+                                    </select>
+                                </div>
+                            </td>
+                    	</tr>
+                    </table>
+                    
+                    <div id="form_txt">タイトル
+                        <span id="txt_red">(必須)</span>
+                    </div>
+                    <div align="center">
+                        <input type="text" id="form_title" size=40>
+                    </div>
+                    
+                    <div id="form_txt">お問い合わせ内容
+                        <span id="txt_red">(必須)</span>
+                    </div>
+                    <div align="center">
+                        <textarea id="form_comment" cols="30" rows="5"></textarea>
+                    </div>
+                    
+                    <!--送信ボタン-->
+                    <input type="button" name="SendBtn" onclick="sendForm();" value="送 信" data-theme="e">
+                </section>
+                
+                <!--フッター-->
+                <div data-role="footer" data-position="fixed" data-theme="e" id="demo">
+                    <div class="tab_area clearfix">
+                        <ul>
+                            <li><a href="#FormPage">Demo1</a></li>
+                            <li><a href="#ListUpPage" onclick="checkForm();">Demo2</a></li>
+                            <li><a href="#SearchPage">Demo3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+        <!--[Demo2]一覧画面-->
+        <div data-role="page" id="ListUpPage" data-theme="t" align="center">
+            <header data-role="header" data-position="fixed" data-theme="e" id="header_txt">
+                <center><h3>Demo2：一覧</h3></center>
+            </header>
+            <section id="searchResult"></section>
+    
+            <section data-role="content">
+                <table id="formTable" border="1" width="100%" cellspacing="0" cellpadding="10" align="center" data-column-popup-theme="e"></table>
+            </section>
+    
+            <!--フッター-->
+            <div data-role="footer" data-position="fixed" data-theme="e" id="demo">
+                <div class="tab_area clearfix">
+                    <ul>
+                        <li><a href="#FormPage">Demo1</a></li>
+                        <li><a href="#ListUpPage" onclick="checkForm();">Demo2</a></li>
+                        <li><a href="#SearchPage">Demo3</a></li>
+                    </ul>
+                </div>
             </div>
-            <div align="center">
-                <input type ="text" id="form_name" size=40>
-            </div>
-            <p>
-
-            <div id="form_txt">メールアドレス
-                <span id="txt_red">(必須)</span>
-            </div>
-            <div align = "center">
-                <input type ="email" id="form_mailaddress" size=40>
-            </div>
-            <p>
-            
-            <table>
-                <tr>
-                <td>
-                    <div id="form_txt">お住まい
-                         <select id="form_prefecture"><p>
-                            <option value="" selected>--選択--</option>
+        </div>
+    
+        <!--[Demo3]条件検索-->
+        <div data-role="page" id="SearchPage" data-theme="t" align="left">
+            <header data-role="header" data-position="fixed" data-theme="e" id="header_txt">
+                <center><h3>Demo3：条件検索</h3></center>
+            </header>
+            <section data-role="content">
+                <div id="form_txt">
+                    <form action="" method="post">
+                        <label for="search">1.アドレスで検索</label>
+                        <input type="email" id="search_address" size=15>
+                        <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchAddress();">
+                        
+                        <label for="search">2.お住まい検索</label>
+                        <select id="search_prefecture">
+                            <option value="" selected>--選択して下さい--</option>
                             <option value="北海道">北海道</option>
                             <option value="青森県">青森県</option>
                             <option value="岩手県">岩手県</option>
@@ -92,294 +337,30 @@
                             <option value="鹿児島県">鹿児島県</option>
                             <option value="沖縄県">沖縄県</option>
                         </select>
-                    </td>
-                    
-                    <td>
-                    <div id="form_txt">ご年齢
-                        <select id="form_age">
-                            <option value="" selected>--選択--</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                            <option value="32">32</option>
-                            <option value="33">33</option>
-                            <option value="34">34</option>
-                            <option value="35">35</option>
-                            <option value="36">36</option>
-                            <option value="37">37</option>
-                            <option value="38">38</option>
-                            <option value="39">39</option>
-                            <option value="40">40</option>
-                            <option value="41">41</option>
-                            <option value="42">42</option>
-                            <option value="43">43</option>
-                            <option value="44">44</option>
-                            <option value="45">45</option>
-                            <option value="46">46</option>
-                            <option value="47">47</option>
-                            <option value="48">48</option>
-                            <option value="49">49</option>
-                            <option value="50">50</option>
-                            <option value="51">51</option>
-                            <option value="52">52</option>
-                            <option value="53">53</option>
-                            <option value="54">54</option>
-                            <option value="55">55</option>
-                            <option value="56">56</option>
-                            <option value="57">57</option>
-                            <option value="58">58</option>
-                            <option value="59">59</option>
-                            <option value="60">60</option>
-                            <option value="61">61</option>
-                            <option value="62">62</option>
-                            <option value="63">63</option>
-                            <option value="64">64</option>
-                            <option value="65">65</option>
-                            <option value="66">66</option>
-                            <option value="67">67</option>
-                            <option value="68">68</option>
-                            <option value="69">69</option>
-                            <option value="70">70</option>
-                            <option value="71">71</option>
-                            <option value="72">72</option>
-                            <option value="73">73</option>
-                            <option value="74">74</option>
-                            <option value="75">75</option>
-                            <option value="76">76</option>
-                            <option value="77">77</option>
-                            <option value="78">78</option>
-                            <option value="79">79</option>
-                            <option value="80">80</option>
-                            <option value="81">81</option>
-                            <option value="82">82</option>
-                            <option value="83">83</option>
-                            <option value="84">84</option>
-                            <option value="85">85</option>
-                            <option value="86">86</option>
-                            <option value="87">87</option>
-                            <option value="88">88</option>
-                            <option value="89">89</option>
-                            <option value="90">90</option>
-                            <option value="91">91</option>
-                            <option value="92">92</option>
-                            <option value="93">93</option>
-                            <option value="94">94</option>
-                            <option value="95">95</option>
-                            <option value="96">96</option>
-                            <option value="97">97</option>
-                            <option value="98">98</option>
-                            <option value="99">99</option>
-                            <option value="100">100</option>
-                            <option value="101">101</option>
-                            <option value="102">102</option>
-                            <option value="103">103</option>
-                            <option value="104">104</option>
-                            <option value="105">105</option>
-                            <option value="106">106</option>
-                            <option value="107">107</option>
-                            <option value="108">108</option>
-                            <option value="109">109</option>
-                            <option value="110">110</option>
-                            <option value="111">111</option>
-                            <option value="112">112</option>
-                            <option value="113">113</option>
-                            <option value="114">114</option>
-                            <option value="115">115</option>
-                            <option value="116">116</option>
-                            <option value="117">117</option>
-                            <option value="118">118</option>
-                            <option value="119">119</option>
-                            <option value="120">120</option>
+                        <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchPrefecture();">
+                        
+                        <label for="search">3.日付で検索</label>
+                        <input type ="date" id="search_date" size=20>
+                        <input type ="time" id="search_time" size=20>
+                        <select id="search_beforeafter">
+                            <option value="before" id="before">以前</option>
+                            <option value="after"  id="after">以後</option>
                         </select>
-                    </div>
-                    </td>
-            	</tr>
-            </table>
-            <p>
-            
-            <div id="form_txt">タイトル
-                <span id="txt_red">(必須)</span>
-            </div>
-            <div align="center">
-                <input type="text" id="form_title" size=40>
-            </div>
-            <p>
-
-            <div id="form_txt">お問い合わせ内容
-                <span id="txt_red">(必須)</span>
-            </div>
-            <div align="center">
-                <textarea id="form_comment" cols="30" rows="5"></textarea>
-            </div>
-            <p>
-    
-
-            <!--送信ボタン-->
-            <input type="button" name="SendBtn" onclick="sendForm();" value="送 信" data-theme="e">
-            <script src="js/app.js">
-            </script>
-            </input>
-        </section>
-
-        <!--フッター-->
-        <div data-role="footer" data-position="fixed" data-theme="e" id="demo">
-            <div class="tab_area clearfix">
-                <ul>
-                    <li><a href="#FormPage">Demo1</a></li>
-                    <li><a href="#ListUpPage" onclick="checkForm();">Demo2</a></li>
-                    <li><a href="#SearchPage">Demo3</a></li>
-                </ul>
-            </div>
-        </div>
-
-       </form>
-    </div>
-
-    <!--[Demo2]一覧画面-->
-    <div data-role="page" id="ListUpPage" data-theme="t" align="center">
-        <header data-role="header" data-position="fixed" data-theme="e" id="header_txt">
-            <center><h3>Demo2：一覧</h3></center>
-        </header>
-        <p>
-        <section id="searchResult"></section>
-
-        <section data-role="content">
-            <table id="formTable" border="1" width="100%" cellspacing="0" cellpadding="10" align="center" data-column-popup-theme="e"></table>
-        </section>
-
-        <!--フッター-->
-        <div data-role="footer" data-position="fixed" data-theme="e" id="demo">
-                <div class="tab_area clearfix">
-                <ul>
-                    <li><a href="#FormPage">Demo1</a></li>
-                    <li><a href="#ListUpPage" onclick="checkForm();">Demo2</a></li>
-                    <li><a href="#SearchPage">Demo3</a></li>
-                </ul>
+                        <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchDate();">
+                    </form>
                 </div>
-        </div>
-    </div>
-
-    <!--[Demo3]条件検索-->
-    <div data-role="page" id="SearchPage" data-theme="t" align="left">
-        <header data-role="header" data-position="fixed" data-theme="e" id="header_txt">
-            <center><h3>Demo3：条件検索</h3></center>
-        </header>
-        <section data-role="content">
-            <div id="form_txt">
-                <form action="" method="post">
-                    <label for="search">1.アドレスで検索</label>
-                    <input type="email" id="search_address" size=15>
-                    <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchAddress();">
-                    <p>
-
-                    <label for="search">2.お住まい検索</label>
-                    <select id="search_prefecture">
-                        <option value="" selected>--選択して下さい--</option>
-                                <option value="北海道">北海道</option>
-                                <option value="青森県">青森県</option>
-                                <option value="岩手県">岩手県</option>
-                                <option value="宮城県">宮城県</option>
-                                <option value="秋田県">秋田県</option>
-                                <option value="山形県">山形県</option>
-                                <option value="福島県">福島県</option>
-                                <option value="茨城県">茨城県</option>
-                                <option value="栃木県">栃木県</option>
-                                <option value="群馬県">群馬県</option>
-                                <option value="埼玉県">埼玉県</option>
-                                <option value="千葉県">千葉県</option>
-                                <option value="東京都">東京都</option>
-                                <option value="神奈川県">神奈川県</option>
-                                <option value="新潟県">新潟県</option>
-                                <option value="富山県">富山県</option>
-                                <option value="石川県">石川県</option>
-                                <option value="福井県">福井県</option>
-                                <option value="山梨県">山梨県</option>
-                                <option value="長野県">長野県</option>
-                                <option value="岐阜県">岐阜県</option>
-                                <option value="静岡県">静岡県</option>
-                                <option value="愛知県">愛知県</option>
-                                <option value="三重県">三重県</option>
-                                <option value="滋賀県">滋賀県</option>
-                                <option value="京都府">京都府</option>
-                                <option value="大阪府">大阪府</option>
-                                <option value="兵庫県">兵庫県</option>
-                                <option value="奈良県">奈良県</option>
-                                <option value="和歌山県">和歌山県</option>
-                                <option value="鳥取県">鳥取県</option>
-                                <option value="島根県">島根県</option>
-                                <option value="岡山県">岡山県</option>
-                                <option value="広島県">広島県</option>
-                                <option value="山口県">山口県</option>
-                                <option value="徳島県">徳島県</option>
-                                <option value="香川県">香川県</option>
-                                <option value="愛媛県">愛媛県</option>
-                                <option value="高知県">高知県</option>
-                                <option value="福岡県">福岡県</option>
-                                <option value="佐賀県">佐賀県</option>
-                                <option value="長崎県">長崎県</option>
-                                <option value="熊本県">熊本県</option>
-                                <option value="大分県">大分県</option>
-                                <option value="宮崎県">宮崎県</option>
-                                <option value="鹿児島県">鹿児島県</option>
-                                <option value="沖縄県">沖縄県</option>
-                    </select>
-                    <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchPrefecture();">
-                    <p>
-                    
-                    <label for="search">3.日付で検索</label>
-                    <input type ="date" id="search_date" size=20>
-                    <input type ="time" id="search_time" size=20>
-                    <select id="search_beforeafter">
-                        <option value="before" id="before">以前</option>
-                        <option value="after"  id="after">以後</option>
-                    </select>
-                    <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchDate();">
-                    <p>
-
-
-                </form>
-            </div>
-        </section>
-
-        <!--フッター-->
-        <div data-role="footer" data-position="fixed" data-theme="e" id="demo">
-            <div class="tab_area clearfix">
-                <ul>
-                    <li><a href="#FormPage">Demo1</a></li>
-                    <li><a href="#ListUpPage" onclick="checkForm();">Demo2</a></li>
-                    <li><a href="#SearchPage">Demo3</a></li>
-                </ul>
+            </section>
+    
+            <!--フッター-->
+            <div data-role="footer" data-position="fixed" data-theme="e" id="demo">
+                <div class="tab_area clearfix">
+                    <ul>
+                        <li><a href="#FormPage">Demo1</a></li>
+                        <li><a href="#ListUpPage" onclick="checkForm();">Demo2</a></li>
+                        <li><a href="#SearchPage">Demo3</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-
-</body>
+    </body>
 </html>
