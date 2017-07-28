@@ -131,35 +131,20 @@ function checkDate(divider){
     //Date型に変換
     var date = new Date(dateandtime);
     date.setHours(date.getHours() + 9); 
-<<<<<<< HEAD
         
     //三項演算子(条件 ? 真:偽)によって以前と以後の処理を分ける
     var formSearch  = ncmb.DataStore("SaveData");
     (divider ? formSearch.lessThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() }) : formSearch.greaterThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() }))
-=======
-
-    //dateをISO形式に変換し第二引数に設定    
-    (divider ? formSearch.lessThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() }) : formSearch.greaterThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() })) // 三項演算子 (条件 ? 真:偽)
->>>>>>> origin/master
         .order("createDate",true)
         .fetchAll()
         .then(function(results){
             //検索成功時の処理
-<<<<<<< HEAD
             console.log("検索に成功しました:"+results.length);
             setData(results);
         })
         .catch(function(error){
             //検索失敗時の処理
             alert("検索に失敗しました：" + error);
-=======
-            setData(results);
-            
-            $.mobile.changePage('#ListUpPage');
-        })
-        .catch(function(error){
-            //検索失敗時の処理
->>>>>>> origin/master
             console.log("検索に失敗しました：" + error);
         });
 }
