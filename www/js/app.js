@@ -126,42 +126,22 @@ function checkDate(divider){
     //Date型に変換
     var date = new Date(dateandtime);
     date.setHours(date.getHours() + 9); 
-    alert("5");
 
-    //dateをISO形式に変換し第二引数に設定
-    if(divider==true){
-        formSearch.lessThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() });
-        alert("3:"+date.toISOString());
-    }else{
-        formSearch.greaterThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() });
-        alert("4:"+date.toISOString());
-    }
-    alert("7");    
-
-    formSearch.order("createDate",true)
-              .fetchAll()
-              .then(function(results){
-                    //検索成功時の処理
-                    alert("6");
-                    if(results.length>0){
-                        //以後で検索＆検索結果が0以上の場合
-                        console.log("検索に成功しました:"+results.length);
-                        setData(results);
-                    }else if(results.length == 0){
-                        //以後で検索＆検索結果が0の場合
-                        var table = document.getElementById("formTable");
-                        formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
-                        var searchresult = document.getElementById("searchResult");
-                        searchResult.innerHTML = "検索結果：" + results.length + "件";
-                    }
-                    $.mobile.changePage('#ListUpPage');
-              })
-              .catch(function(error){
-                    //検索失敗時の処理
-                    console.log("検索に失敗しました：" + error);
-              });
+    //dateをISO形式に変換し第二引数に設定    
+    (divider ? formSearch.lessThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() }) : formSearch.greaterThanOrEqualTo("createDate", { "__type": "Date", "iso": date.toISOString() })) // 三項演算子 (条件 ? 真:偽)
+        .order("createDate",true)
+        .fetchAll()
+        .then(function(results){
+            //検索成功時の処理
+            setData(results);
+            
+            $.mobile.changePage('#ListUpPage');
+        })
+        .catch(function(error){
+            //検索失敗時の処理
+            console.log("検索に失敗しました：" + error);
+        });
 }
-
 
 //テーブルにデータをセットする処理
 function setData(results) {
@@ -250,10 +230,8 @@ function searchDate(){
         alert("以前／以後を選択してください");
     }else{
         if($("#search_beforeafter").val() == "before"){
-            alert("1:");
             divider = true;
         }else{
-            alert("2:");
             divider = false;
         }
     checkDate(divider);
