@@ -41,7 +41,7 @@ function sendForm() {
                     //保存に成功した場合の処理
                     alert("お問い合わせを受け付けました");
                     console.log("お問い合わせを受け付けました");
-                    $.mobile.changePage('#FormPage');
+                    location.reload();
                 })
                 .catch(function(err){
                     //保存に失敗した場合の処理
