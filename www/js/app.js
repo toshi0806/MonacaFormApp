@@ -6,7 +6,7 @@ var ncmb    　= new NCMB(appKey,clientKey);
 // -------[Demo1]フォームに入力された内容をmBaaSに保存する -------//
 function sendForm() {
         
-    //ユーザーの入力したデータをそれぞれ変数にセットする
+    //(1)ユーザーの入力したデータを変数にセットする
     var username    = $("#form_name").val();            //お名前
     var mailaddress = $("#form_mailaddress").val();     //メールアドレス
     var prefecture  = $("#form_prefecture").val();      //お住まい
@@ -14,10 +14,10 @@ function sendForm() {
     var title       = $("#form_title").val();           //タイトル
     var comment     = $("#form_comment").val();         //内容
         
-    //agestrをint型に変換
+    //(2)agestrをint型に変換
     var ageint = Number(agestr);
         
-    //お住まいと年齢以外で入力がない項目があった場合、アラートを表示させる
+    //(3)入力規則およびデータをフィールドにセットする
     if(username == ""){
         alert("お名前が入力されていません");
     }else if(mailaddress == ""){
