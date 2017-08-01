@@ -27,8 +27,9 @@ function sendForm() {
     }else if(comment == ""){
         alert("お問い合わせ内容が入力されていません");
     }else{
-        var SaveData = ncmb.DataStore("SaveData");   //mBaaSにて保存先クラスを作成
-        var sendData = new SaveData();               //保存先クラスのインスタンスを生成
+        //mBaaSにて保存先クラスの作成、およびインスタンスの生成
+        var SaveData = ncmb.DataStore("SaveData");
+        var sendData = new SaveData();
             
         sendData.set("username", username)
                 .set("mailaddress", mailaddress)
