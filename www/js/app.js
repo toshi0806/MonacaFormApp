@@ -56,13 +56,11 @@ function sendForm() {
 function checkForm(){
     $("#formTable").empty();
 
-    //日付、名前、タイトルを降順でデータを取得するように設定する
+    //日付、名前、タイトルを降順でデータを取得する
     var formData = ncmb.DataStore("SaveData");
     formData.order("createDate",true)
             .order("username", true)
             .order("title",true)
-                
-            //データの取得
             .count()
             .fetchAll()
             .then(function(results){
