@@ -14,7 +14,7 @@ function sendForm() {
     var title       = $("#form_title").val();           //タイトル
     var comment     = $("#form_comment").val();         //内容
         
-    //(2)agestrをint型に変換
+    //(2)agestrを数値に変換
     var ageint = Number(agestr);
         
     //(3)入力規則およびデータをフィールドにセットする
@@ -38,7 +38,7 @@ function sendForm() {
                 .set("title", title)
                 .set("comment", comment)
                 .save()
-                .then(function(object){
+                .then(function(results){
                     //保存に成功した場合の処理
                     alert("お問い合わせを受け付けました");
                     console.log("お問い合わせを受け付けました");
