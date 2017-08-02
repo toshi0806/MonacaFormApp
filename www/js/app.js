@@ -122,10 +122,7 @@ function checkPrefecture(){
 function checkDate(divider){
     var searchdate  = $("#search_date").val();          //年/月/日の値を変数searchdateに格納
     var searchtime  = $("#search_time").val();          //時間に入力された値を変数searchtimeに格納
-    var beforeafter = $("#search_beforeafter").val();   //以前以後のどちらか選択された値を変数beforeafterに格納
-    var before      = $("#before").val();               //選択された値が以前だった場合、変数beforeに格納
-    var after       = $("#after").val();                //選択された値が以後だった場合、変数afterに格納        
-    var dateandtime = searchdate+" "+searchtime;        //検索用に二つの変数(searchdateとsearchtime)を合体　YYYY/MM/DD hh:mm
+    var dateandtime = searchdate+" "+searchtime;        //検索用に二つの変数(searchdateとsearchtime)を合体
         
     //Date型に変換
     var date = new Date(dateandtime);
