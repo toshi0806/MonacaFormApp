@@ -234,7 +234,7 @@
                     </div>
                     
                     <!--送信ボタン-->
-                    <input type="button" name="SendBtn" onclick="sendForm();" value="送 信" data-theme="e">
+                    <input type="button" name="SendBtn" onclick="return sendForm();" value="送 信" data-theme="e">
                 </section>
                 
                 <!--フッター-->
@@ -277,14 +277,14 @@
             <section data-role="content">
                 <div id="form_txt">
                     <form action="" method="post">
-                        <label for="search">1.アドレスで検索</label>
+                        <label for="search">1.メールアドレスを検索</label>
                         <input type="email" id="search_address" size=15>
                         <input type="button" value="　検 索　" data-theme="e" data-inline="true" data-mini="true" onclick="searchAddress();">
                     </form>
                 </div>
                 <div id="form_txt">
                     <form action="" method="post">
-                        <label for="search">2.お住まい検索</label>
+                        <label for="search">2.お住まいを検索</label>
                         <select id="search_prefecture">
                             <option value="" selected>--選択して下さい--</option>
                             <option value="北海道">北海道</option>
@@ -340,7 +340,7 @@
                 </div>
                 <div id="form_txt">
                     <form>
-                        <label for="search">3.日付で検索</label>
+                        <label for="search">3.日付を検索</label>
                         <input type ="date" id="search_date" size=20>
                         <input type ="time" id="search_time" size=20>
                         <select id="search_beforeafter">
