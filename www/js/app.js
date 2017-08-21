@@ -66,19 +66,19 @@ function checkForm(){
     saveData.order("createDate",true)
             .fetchAll()
             .then(function(results){
-                //検索に成功した場合の処理
-                console.log("検索に成功しました："+results.length);
+                //全件検索に成功した場合の処理
+                console.log("全件検索に成功しました："+results.length+"件");
                 //テーブルにデータをセット
                 setData(results);
             })
             .catch(function(error){
-                //検索に失敗した場合の処理
-                alert("検索に失敗しました：\n" + error);
-                console.log("検索に失敗しました：\n" + error);
+                //全件検索に失敗した場合の処理
+                alert("全件検索に失敗しました：\n" + error);
+                console.log("全件検索に失敗しました：\n" + error);
             });
 }
 
-// -------[Demo3-1]アドレスを指定して検索し取得する------- //
+// -------[Demo3-1]メールアドレスを指定して検索し取得する------- //
 function checkAddress(){ 
     //データを変数にセット
     var mailaddress = $('#search_address').val();
@@ -91,19 +91,19 @@ function checkAddress(){
             .equalTo("mailaddress",mailaddress)
             .fetchAll()
             .then(function(results){
-                //検索成功時の処理
-                console.log("検索に成功しました："+results.length);
+                //メールアドレスの検索に成功した場合の処理
+                console.log("メールアドレスの検索に成功しました："+results.length+"件");
                 setData(results);
                 $.mobile.changePage('#ListUpPage');
             })
             .catch(function(error){
-                //検索失敗時の処理
-                alert("検索に失敗しました：\n" + error);
-                console.log("検索に失敗しました：\n" + error);
+                //メールアドレスの検索に失敗した場合の処理
+                alert("メールアドレスの検索に失敗しました：\n" + error);
+                console.log("メールアドレスの検索に失敗しました：\n" + error);
             });
 }
 
-//------- [Demo3-2]都道府県を指定して検索し取得する-------//
+//------- [Demo3-2]お住まいを指定して検索し取得する-------//
 function checkPrefecture(){
     //データを変数にセット
     var prefecture = $("#search_prefecture").val();
@@ -116,15 +116,15 @@ function checkPrefecture(){
             .equalTo("prefecture",prefecture)
             .fetchAll()
             .then(function(results){
-                //検索成功時の処理
-                console.log("検索に成功しました："+results.length);
+                //お住まいの検索に成功した場合の処理
+                console.log("お住まいの検索に成功しました："+results.length+"件");
                 setData(results);
                 $.mobile.changePage('#ListUpPage');
             })
             .catch(function(error){
-                //検索失敗時の処理
-                alert("検索に失敗しました：\n" + error);
-                console.log("検索に失敗しました：\n" + error);
+                //お住まいの検索に失敗した場合の処理
+                alert("お住まいの検索に失敗しました：\n" + error);
+                console.log("お住まいの検索に失敗しました：\n" + error);
             });
 }
 
@@ -149,14 +149,14 @@ function checkDate(divider){
                        .order("createDate",true)
                        .fetchAll()
                        .then(function(results){
-                           //検索成功時の処理
-                           console.log("検索に成功しました："+results.length);
+                           //日付の検索に成功した場合の処理
+                           console.log("日付の検索に成功しました："+results.length+"件");
                            setData(results);
                        })
                        .catch(function(error){
-                           //検索失敗時の処理
-                           alert("検索に失敗しました：\n" + error);
-                           console.log("検索に失敗しました：\n" + error);
+                           //日付の検索に失敗した場合の処理
+                           alert("日付の検索に失敗しました：\n" + error);
+                           console.log("日付の検索に失敗しました：\n" + error);
                        });
 }
 
@@ -184,42 +184,43 @@ function setData(results) {
             formTable.rows[i].cells[0].innerHTML = jstDate + "<br>" + "お名前：　" + object.get("username") + " さん"+"<br>" +"タイトル："+object.get("title");
         }
     var searchresult = document.getElementById("searchResult");
-    searchResult.innerHTML = "検索結果：" + results.length + "件";
+    searchResult.innerHTML = "検索結果："+results.length+"件";
         
+    //セットするデータが無かった場合
     if(results.length == 0){
         var table = document.getElementById("formTable");
         formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
         var searchresult = document.getElementById("searchResult");
-        searchResult.innerHTML = "検索結果：" + results.length + "件";
-        console.log("検索結果："+results.length);
-    }else if(function(error){
-        //検索失敗時の処理
-        console.log("検索に失敗しました：\n" + error);
-        alert("検索に失敗しました：\n" + error);
-    });
+        searchResult.innerHTML = "検索結果："+results.length+"件";
+        console.log("検索結果："+results.length+"件");
+    };
     $.mobile.changePage('#ListUpPage');
 }
 
-//アドレス検索ボタン押下時の処理
+//メールアドレス検索ボタン押下時の処理
 function searchAddress(){
     $("#formTable").empty();
-    var mailaddress = $('#search_address').val();  //アドレス欄に入力された値を変数mailaddressに格納
         
-    //アドレスをフィールドの中から探す
+    //メールアドレス欄に入力された値を変数mailaddressに格納
+    var mailaddress = $('#search_address').val();
+        
+    //メールアドレスをフィールドの中から探す
     if(mailaddress == ""){
         alert("メールアドレスを入力してください");
     }else{
-        //入力されたアドレスを調べる
+        //入力されたメールアドレスを調べる
         checkAddress(mailaddress);
     }
 }
 
-//住まい検索ボタン押下時の処理
+//お住まい検索ボタン押下時の処理
 function searchPrefecture(){
     $("#formTable").empty();
-    var prefecture = $("#search_prefecture").val();  //ユーザーに選択された都道府県を変数prefectureに格納
         
-    //フィールドの中から探す
+    //ユーザーに選択されたお住まいを変数prefectureに格納
+    var prefecture = $("#search_prefecture").val();
+        
+    //お住まいをフィールドの中から探す
     if(prefecture == ""){
         alert("都道府県を選択してください");
     }else{
