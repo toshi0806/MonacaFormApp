@@ -183,17 +183,15 @@ function setData(results) {
                 
             formTable.rows[i].cells[0].innerHTML = jstDate + "<br>" + "お名前：　" + object.get("username") + " さん"+"<br>" +"タイトル："+object.get("title");
         }
-    var searchresult = document.getElementById("searchResult");
+    var searchResult = document.getElementById("searchResult");
     searchResult.innerHTML = "検索結果："+results.length+"件";
         
     //セットするデータが無かった場合
     if(results.length == 0){
         var table = document.getElementById("formTable");
         formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
-        var searchresult = document.getElementById("searchResult");
         searchResult.innerHTML = "検索結果："+results.length+"件";
-        console.log("検索結果："+results.length+"件");
-    };
+    }
     $.mobile.changePage('#ListUpPage');
 }
 
