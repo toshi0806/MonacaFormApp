@@ -190,7 +190,6 @@ function setData(results) {
     if(results.length == 0){
         var table = document.getElementById("formTable");
         formTable.innerHTML = "<br>" + "<center>" + "データはありません" + "</center>" + "<br>";   
-        searchResult.innerHTML = "検索結果："+results.length+"件";
     }
     $.mobile.changePage('#ListUpPage');
 }
